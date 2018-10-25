@@ -1,0 +1,15 @@
+<div>
+<form (ngSubmit)="onSearchName()">
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="text" class="form-control" id="firstName"  placeholder="first name here" name="firstName" required [(ngModel)]="firstName">
+
+    <label for="lastName">Last Name</label>
+    <input type="text" class="form-control" id="lastName" placeholder = "last name here" name="lastName" required [(ngModel)]="lastName">
+ 
+  <button type="submit" class="btn btn-success">Name Search</button>
+  <button (click)="AddUser()" class="btn btn-success">Add Names</button>
+</div>
+</form>
+</div>
+<div *ngIf="message"  role="alert">{{message}}</div>
