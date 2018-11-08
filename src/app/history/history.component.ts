@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HistoryService } from './history.service';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -9,7 +9,7 @@ import { HistoryService } from './history.service';
 export class HistoryComponent implements OnInit {
   searchHistory: any[];
 
-  constructor(private historyService: HistoryService) { 
+  constructor(private historyService: HistoryService,private router: Router) { 
     this.historyService
     .getSearchHistory()
     .subscribe(search => {

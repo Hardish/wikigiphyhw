@@ -16,11 +16,12 @@ import {FormsModule} from '@angular/forms';
 
 import { LoginService } from './login/login.service';
 import { AppRoutingModule } from './app-routing.module';
-
+import { HttpClientModule } from '@angular/common/http'; 
 import {AuthGuard} from './login/auth.guard';
 import { DashboardService } from './dashboard/dashboard.service';
 import { HistoryService } from './history/history.service';
-
+import { WikipediaSearchService } from "./wikipedia-search.service";
+import { GiphyService } from './giphy-search.service';
 
 @NgModule({
   declarations: [
@@ -32,13 +33,13 @@ import { HistoryService } from './history/history.service';
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    
+    HttpClientModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
     AppRoutingModule
   ],
-  providers: [LoginService, AuthGuard, DashboardService, HistoryService],
+  providers: [LoginService, AuthGuard, DashboardService, HistoryService,WikipediaSearchService,GiphyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

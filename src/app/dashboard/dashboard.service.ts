@@ -6,44 +6,27 @@ import { mergeMap } from 'rxjs/operators';
 @Injectable()
 export class DashboardService {
   searchHistoryRef: any;
-
+  items:Array<string>;
   constructor(
-    private loginService: LoginService,
-    private db: AngularFireDatabase) {
+    private loginService: LoginService,private db: AngularFireDatabase)
+     {
     this.searchHistoryRef = this.db.list(`currentSession/${this.loginService.userUid}/searchHistory`);
-  }
+    }
 
   getHistory() {
     return this.searchHistoryRef.valueChanges();
   }
 
-  addflName(firstName: string, lastName: string) {
-    const nam: any = {};
-    if (firstName) {
-      nam[`firstNames/${firstName}`] = true;
-    }
-    if (lastName) {
-      nam[`lastNames/${lastName}`] = true;
-    }
-    return this.db.database.ref().update(nam);
-  }
+  
+  searchName(wikiSearch: string)
+   {
 
-  searchName(firstName: string, lastName: string) {
-    return this.db.object(`/firstNames/${firstName}`).valueChanges().pipe(
-      mergeMap(
-        _ => this.db.object(`lastNames/${lastName}`).valueChanges(),
-        (first, last) => {
-          if (first && last) {
-            return true;
-          }
-         
-        }
-      )
-    )
-  }
+    console.log(wikiSearch+'in the searchName function');
+    
+     }
 
-  addToHistory(firstName: string, lastName: string) {
-    var search = firstName + " " + lastName;
+  addToHistory(items: Array<string>) {
+    var search = items;
     this.db.object(`currentSession/${this.loginService.userUid}/searchHistory`)
     .update({[Date.now()]: search});
   }

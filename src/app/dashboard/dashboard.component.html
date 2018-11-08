@@ -1,15 +1,30 @@
 <div>
 <form (ngSubmit)="onSearchName()">
   <div class="form-group">
-    <label for="firstName">First Name</label>
-    <input type="text" class="form-control" id="firstName"  placeholder="first name here" name="firstName" required [(ngModel)]="firstName">
-
-    <label for="lastName">Last Name</label>
-    <input type="text" class="form-control" id="lastName" placeholder = "last name here" name="lastName" required [(ngModel)]="lastName">
+    <label for="searchonwiki">Wikipedia Search</label>
+    <input class="form-control" id="wikiSearch" (input)="term$.next($event.target.value)" placeholder="search text here" name="wikiSearch" required [(ngModel)]="wikiSearch"/>
  
-  <button type="submit" class="btn btn-success">Name Search</button>
-  <button (click)="AddUser()" class="btn btn-success">Add Names</button>
+ <!-- <div class="container">
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let item of items; index as i">
+      <a href="{{links[i]}}">{{item}}</a>
+  </li>
+</ul>
+</div> -->
+
+
+  <button type="submit" class="btn btn-success">Giphy Search</button>
+  <br>Results for :
+<h1>{{wikiSearch}}</h1>
+
+<div id="card-container" *ngFor="let item of result?.data">
+  <div class="short" *ngIf=item.images.original.url>
+    
+      <img  src="{{item?.images.original.url}}">
+   
+  </div>
+</div>
 </div>
 </form>
-</div>
-<div *ngIf="message"  role="alert">{{message}}</div>
+
+
